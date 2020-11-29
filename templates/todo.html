@@ -1,0 +1,64 @@
+{% extends "layout.html" %}
+{% block hello %}
+<div style="margin-top: 100px;" class="container">
+    <h3>To Do List</h3>
+    <hr>
+    <form action="/add" method="post">
+      <div class="form-grup">
+        <label for="formGroupExampleInput">Todo Başlık</label>
+        <input type="text" class="form-control" name = "title" id="formGroupExampleInput" placeholder="Todo Giriniz..."><br>
+        <button type="submit" class="btn btn-info">To Do Ekle</button>
+      </div>
+    </form>
+    <br>
+
+    
+
+
+
+{% if todos %}
+<table class="table">
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">id</th>
+      <th scope="col">To Do Başlık</th>
+      <th scope="col">To Do Durum</th>
+      <th scope="col">Durum güncelle</th>
+      <th scope="col">To Do Sil</th>
+    </tr>
+  </thead>
+{% for todo1 in todos %} 
+
+<tbody>
+<tr>
+<th scope="row">{{todo1.id}}</th>
+<td>{{todo1.title}}</td>
+{% if todo1.todo==False %}
+<td>Tamamlanmadı</td>
+<td><a href="/complete/{{todo1.id}}" class="btn btn-danger">Tamamla</a></td>
+{% else %}
+<td>Tamamlandı</td>
+<td><a href="/complete/{{todo1.id}}" class="btn btn-warning">Değiştir</a></td>
+
+{% endif %}
+
+
+<td><a href="/delete/{{todo1.id}}" class="btn btn-danger">Sil</a></td>
+
+</tr>
+
+</tbody>{% endfor %}
+
+
+</table>
+{% else %}
+<div class="alert alert-warning" role="alert">
+This is a warning alert—check it out!
+{% endif %}
+
+</div>
+
+
+
+{% endblock %}
